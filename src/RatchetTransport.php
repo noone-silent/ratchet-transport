@@ -2,6 +2,7 @@
 
 namespace Thruway\Transport;
 
+use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Request;
 use Ratchet\RFC6455\Messaging\Frame;
 use React\EventLoop\LoopInterface;
@@ -74,7 +75,7 @@ class RatchetTransport extends AbstractTransport
         /** @var Request $request */
         $request     = $this->conn->httpRequest;
         $headers     = $request->getHeaders();
-        $queryParams = \GuzzleHttp\Psr7\parse_query($request->getUri()->getQuery());
+        $queryParams = Query::parse($request->getUri()->getQuery());
         $cookies     = $request->getHeader("Cookie");
         $url         = $request->getUri()->getPath();
 
